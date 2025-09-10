@@ -4,7 +4,7 @@ import type {
   AirgapAuth,
   ConsentManagerConfig,
 } from '@transcend-io/airgap.js-types';
-import { ConsentManagerLanguageKey } from '@transcend-io/internationalization';
+import {ConsentManagerLanguageKey, ConsentManagerSupportedTranslationValue} from '@transcend-io/internationalization';
 import { ObjByString } from '@transcend-io/type-utils';
 
 /**
@@ -59,7 +59,7 @@ export type HandleSetViewState = (
 /**
  * Handler for setting user language
  */
-export type HandleSetLanguage = (language: ConsentManagerLanguageKey) => void;
+export type HandleSetLanguage = (language: ConsentManagerSupportedTranslationValue) => void;
 
 /**
  * Handler for changing UI variables

@@ -8,7 +8,31 @@ import { MenuItem } from './MenuItem';
 import { ObjByString } from '@transcend-io/type-utils';
 import {ExternalLinkIcon} from './ExternalLinkIcon';
 
-const VIEW_STATE_TO_MESSAGE: { [k in ViewState]: DefinedMessage | undefined } =
+const VIEW_STATE_TO_MESSAGE: {
+  LanguageOptions: DefinedMessage;
+  DoNotSellDisclosure: DefinedMessage;
+  OptOutDisclosure: DefinedMessage;
+  QuickOptions: DefinedMessage;
+  QuickOptions3: DefinedMessage;
+  AcceptAll: DefinedMessage;
+  AcceptAllOrMoreChoices: DefinedMessage;
+  AcceptOrRejectAll: DefinedMessage;
+  AcceptOrRejectAllOrMoreChoices: DefinedMessage;
+  AcceptOrRejectAnalytics: DefinedMessage;
+  AcceptOrRejectAdvertising: DefinedMessage;
+  AcceptAllRejectAllToggle: DefinedMessage;
+  NoticeAndDoNotSell: DefinedMessage;
+  DoNotSellExplainer: DefinedMessage;
+  PrivacyPolicyNotice: DefinedMessage;
+  CompleteOptions: DefinedMessage;
+  CompleteOptionsInverted: DefinedMessage;
+  Collapsed: DefinedMessage;
+  Closed: DefinedMessage;
+  Hidden: DefinedMessage;
+  TCF_EU: undefined;
+  CompleteOptionsToggles: DefinedMessage;
+  PrivacyPolicyNoticeWithCloseButton: DefinedMessage
+} =
   {
     LanguageOptions: bottomMenuMessages.showPolicyButtonLanguageOptions,
     DoNotSellDisclosure: bottomMenuMessages.showPolicyButtonDoNotSellDisclosure,
@@ -69,7 +93,7 @@ export function BottomMenu({
   globalUiVariables: ObjByString;
 }): JSX.Element {
   const { formatMessage } = useIntl();
-  const policyMessage = VIEW_STATE_TO_MESSAGE[viewState];
+  const policyMessage = VIEW_STATE_TO_MESSAGE[viewState as keyof typeof VIEW_STATE_TO_MESSAGE];
 
   return (
     <div className="bottom-menu-container">

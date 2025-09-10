@@ -9,6 +9,8 @@ interface MenuItemBaseProps
   label: string;
   /** Inner HTML of <a> tag */
   children: ComponentChild;
+  classes?: string;
+
 }
 
 /**
@@ -17,6 +19,9 @@ interface MenuItemBaseProps
 interface MenuItemButtonProps extends MenuItemBaseProps {
   /** Whether this is a button or a tag */
   type: 'button';
+  href?: never;
+  rel?: never;
+  target?: never;
 }
 
 /**
@@ -25,6 +30,9 @@ interface MenuItemButtonProps extends MenuItemBaseProps {
 interface MenuItemAnchorProps extends MenuItemBaseProps {
   /** Whether this is a button or a tag */
   type: 'a';
+  href?: string;
+  rel?: string;
+  target?: string;
 }
 
 /**
@@ -38,12 +46,13 @@ type MenuItemProps = MenuItemAnchorProps | MenuItemButtonProps;
  * A set of buttons to choose a set of predefined options
  */
 export function MenuItem({
-  label,
   type,
   onClick,
-  href,
   children,
   classes,
+  href,
+  rel,
+  target,
 }: MenuItemProps): JSX.Element {
   return (
     <Fragment>
@@ -59,8 +68,8 @@ export function MenuItem({
         <a
           className={`bottom-menu-item${classes ? ` ${classes}` : ''}`}
           href={href}
-          target="_blank"
-          rel="noopener noreferrer"
+          rel={rel ?? 'noopener noreferrer'}
+          target={target ?? '_blank'}
         >
           {children}
         </a>
