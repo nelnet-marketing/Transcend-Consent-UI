@@ -65,13 +65,12 @@ export function QuickOptions3({
 
   return (
     <div>
-      <p
+      <h2
         id="consent-dialog-title"
-        role="heading"
         className="text-title text-title-center"
       >
         {formatMessage(messages.consentTitle, globalUiVariables)}
-      </p>
+      </h2>
       <div
         className="column-content"
         role="group"

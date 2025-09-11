@@ -33,13 +33,12 @@ export function NoticeAndDoNotSell({
 
   return (
     <div className="column-content" role="none">
-      <p
+      <h2
         id="consent-dialog-title"
-        role="heading"
         className="text-title text-title-left"
       >
         {formatMessage(messages.noticeTitle, globalUiVariables)}
-      </p>
+      </h2>
       <Button
         primaryText={formatMessage(
           noticeAndDoNotSellMessages.confirmButtonPrimary,

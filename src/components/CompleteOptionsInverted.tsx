@@ -88,16 +88,15 @@ export function CompleteOptionsInverted({
 
   return (
     <div className="complete-options-container" role="none">
-      <p
+      <h2
         id="consent-dialog-title"
-        role="heading"
         className="text-title text-title-center"
       >
         {formatMessage(
           messages.completeOptionsInvertedTitle,
           globalUiVariables,
         )}
-      </p>
+      </h2>
       <form className="complete-options-form">
         <GPCIndicator globalUiVariables={globalUiVariables} />
         {description && description !== '-' ? (

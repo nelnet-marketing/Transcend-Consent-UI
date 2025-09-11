@@ -5,13 +5,12 @@ exports[`AcceptOrRejectAnalytics matches snapshot 1`] = `
   <div class="column-content">
     <div>
       <div>
-        <p
+        <h2
           id="consent-dialog-title"
-          role="heading"
           class="text-title text-title-left"
         >
           This website uses analytics
-        </p>
+        </h2>
       </div>
       <div>
         <p class="paragraph">

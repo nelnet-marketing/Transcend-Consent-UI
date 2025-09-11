@@ -47,13 +47,12 @@ export function AcceptAllOrMoreChoices({
   return (
     <div className="dialog-container">
       <div className="dialog-title">
-        <p
+        <h2
           id="consent-dialog-title"
-          role="heading"
           className="text-title text-title-left"
         >
           {formatMessage(messages.consentTitleAcceptAll, globalUiVariables)}
-        </p>
+        </h2>
       </div>
       <div className="column-content">
         <div className="paragraph-container w-75">
