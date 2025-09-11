@@ -5,6 +5,7 @@ import { h, JSX } from 'preact';
  */
 export function Switch({
   id,
+  ariaDescribedby,
   checked,
   handleSwitch,
   disabled,
@@ -22,6 +23,8 @@ export function Switch({
   ) => void;
   /** The ID of the switch */
   id: string;
+  /** aria-describedby attribute */
+  ariaDescribedby?: string;
   /** The label for the switch */
   label: string;
   /** Whether to autofocus this input */
@@ -38,7 +41,9 @@ export function Switch({
       <input
         className="switch switch-checkbox screen-reader"
         id={`switch-${id}`}
+        aria-describedby={ariaDescribedby}
         type="checkbox"
+        role="switch"
         disabled={disabled}
         checked={checked}
         onChange={(e) => handleSwitch(!checked, e)}

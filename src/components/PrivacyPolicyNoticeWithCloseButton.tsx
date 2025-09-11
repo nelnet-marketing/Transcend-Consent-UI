@@ -28,17 +28,6 @@ export function PrivacyPolicyNoticeWithCloseButton({
 
   return (
     <div className="column-content" role="none">
-      <CloseButton
-        onClick={(event) => {
-          event.preventDefault();
-          airgap.setConsent(event, {}, CONSENT_OPTIONS);
-          handleSetViewState('close');
-        }}
-        globalUiVariables={globalUiVariables}
-        className="privacy-policy-notice-with-close-button-close"
-        fontColor={fontColor}
-        initialFocus
-      />
       <div>
         <div>
           <h2
@@ -64,6 +53,17 @@ export function PrivacyPolicyNoticeWithCloseButton({
           />
         </div>
       </div>
+      <CloseButton
+        onClick={(event) => {
+          event.preventDefault();
+          airgap.setConsent(event, {}, CONSENT_OPTIONS);
+          handleSetViewState('close');
+        }}
+        globalUiVariables={globalUiVariables}
+        className="privacy-policy-notice-with-close-button-close"
+        fontColor={fontColor}
+        initialFocus
+      />
     </div>
   );
 }

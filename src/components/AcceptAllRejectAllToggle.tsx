@@ -62,14 +62,6 @@ export function AcceptAllRejectAllToggle({
 
   return (
     <div className="column-content" role="none">
-      <CloseButton
-        onClick={() => {
-          handleSetViewState('close');
-        }}
-        className="accept-all-reject-all-toggle-close"
-        fontColor={fontColor}
-        globalUiVariables={globalUiVariables}
-      />
       <div>
         <div>
           <h2
@@ -94,6 +86,14 @@ export function AcceptAllRejectAllToggle({
             }}
           />
         </div>
+        <CloseButton
+          onClick={() => {
+            handleSetViewState('close');
+          }}
+          className="accept-all-reject-all-toggle-close"
+          fontColor={fontColor}
+          globalUiVariables={globalUiVariables}
+        />
         <div className="margin-tops do-not-sell-explainer-interface">
           <GPCIndicator globalUiVariables={globalUiVariables} />
           <Switch

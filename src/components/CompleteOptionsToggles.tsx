@@ -114,15 +114,6 @@ export function CompleteOptionsToggles({
 
   return (
     <div className="column-content" role="none">
-      <CloseButton
-        onClick={() => {
-          handleSetViewState('close');
-        }}
-        className="complete-options-toggle-close"
-        fontColor={fontColor}
-        globalUiVariables={globalUiVariables}
-        {...(Object.entries(selectionsToRender).length === 0 ? { initialFocus: true } : {})}
-      />
       <div>
         <div>
           <h2
@@ -147,6 +138,15 @@ export function CompleteOptionsToggles({
             }}
           />
         </div>
+        <CloseButton
+          onClick={() => {
+            handleSetViewState('close');
+          }}
+          className="complete-options-toggle-close"
+          fontColor={fontColor}
+          globalUiVariables={globalUiVariables}
+          {...(Object.entries(selectionsToRender).length === 0 ? {initialFocus: true} : {})}
+        />
         <div
           className="margin-tops complete-options-toggle-interface"
           role="group"
@@ -160,6 +160,7 @@ export function CompleteOptionsToggles({
               id={`Essential-true`}
               checked={true}
               disabled={true}
+              ariaDescribedby="essential-desc"
               handleSwitch={(checked, event) =>
                 // this should never be called but makes type happy
                 handleSwitch({
@@ -177,7 +178,7 @@ export function CompleteOptionsToggles({
                   : 'Essential'
               }
             />
-            <p className="paragraph complete-options-toggle-description">
+            <p className="paragraph complete-options-toggle-description" id="essential-desc">
               {formatMessage(
                 purposeToDescriptionKey.Essential,
                 globalUiVariables,
@@ -188,6 +189,7 @@ export function CompleteOptionsToggles({
             <span key={purpose}>
               <Switch
                 id={purpose}
+                ariaDescribedby={`${purpose}-desc`}
                 checked={selectionsToRender[purpose]}
                 handleSwitch={(checked, event) =>
                   handleSwitch({
@@ -206,7 +208,7 @@ export function CompleteOptionsToggles({
                 }
                 {...(idx === 0 ? { initialFocus: true } : {})}
               />
-              <p className="paragraph complete-options-toggle-description">
+              <p className="paragraph complete-options-toggle-description" id={`${purpose}-desc`}>
                 {formatMessage(
                   purposeToDescriptionKey[purpose],
                   globalUiVariables,

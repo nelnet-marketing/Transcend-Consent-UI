@@ -55,14 +55,6 @@ export function DoNotSellExplainer({
 
   return (
     <div className="column-content" role="none">
-      <CloseButton
-        onClick={() => {
-          handleSetViewState('close');
-        }}
-        className="do-not-sell-explainer-close"
-        fontColor={fontColor}
-        globalUiVariables={globalUiVariables}
-      />
       <div>
         <div>
           <h2
@@ -87,6 +79,14 @@ export function DoNotSellExplainer({
             }}
           />
         </div>
+        <CloseButton
+          onClick={() => {
+            handleSetViewState('close');
+          }}
+          className="do-not-sell-explainer-close"
+          fontColor={fontColor}
+          globalUiVariables={globalUiVariables}
+        />
         <div className="margin-tops do-not-sell-explainer-interface">
           <GPCIndicator globalUiVariables={globalUiVariables} />
           <Switch

@@ -1,5 +1,5 @@
 /** @jsx h */
-import { h, JSX } from 'preact';
+import {h, JSX, Ref} from 'preact';
 import type {
   AirgapAPI,
   AirgapAuth,
@@ -55,6 +55,7 @@ export function Main({
   firstSelectedViewState,
   globalUiVariables,
   handleSetViewState,
+  bannerTopRef,
   handleChangeLanguage,
   supportedLanguages,
   modalOpenAuth,
@@ -73,6 +74,8 @@ export function Main({
   firstSelectedViewState: ViewState | 'AcceptOrRejectAll' | null;
   /** Updater function for viewState */
   handleSetViewState: HandleSetViewState;
+  /** Ref to the top of the banner */
+  bannerTopRef: Ref<HTMLDivElement>;
   /** Updater function for language change */
   handleChangeLanguage: (language: ConsentManagerLanguageKey) => void;
   /** Set of supported languages */
@@ -179,13 +182,15 @@ export function Main({
       <div
         role="dialog"
         aria-modal="true"
+        aria-live="polite"
+        aria-atomic="true"
         aria-label={formatMessage(messages.modalAriaLabel, globalUiVariables)}
         className="modal-container"
         id="consentManagerMainDialog"
         ref={dialogRef}
         tabIndex={-1}
       >
-        <div className="modal-container-inner">
+        <div className="modal-container-inner" ref={bannerTopRef} tabIndex={-1}>
           <div className="inner-container">
             {viewState === 'QuickOptions' && (
               <QuickOptions
