@@ -125,16 +125,15 @@ export function CompleteOptionsToggles({
       />
       <div>
         <div>
-          <p
+          <h2
             id="consent-dialog-title"
-            role="heading"
             className="text-title text-title-left"
           >
             {formatMessage(
               messages.consentTitleCompleteOptionsToggle,
               globalUiVariables,
             )}
-          </p>
+          </h2>
         </div>
         <div>
           <p
