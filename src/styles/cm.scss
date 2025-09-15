@@ -29,6 +29,14 @@ $dark: #162310;
 	--focus-color: #{$focus-color};
 }
 
+.modal-container,
+.modal-container-inner,
+h2 {
+  &[tabindex="-1"]:focus {
+    outline: none;
+  }
+}
+
 /******************* * Modal *******************/
 
 /** Container that is wrapped around the modal */
