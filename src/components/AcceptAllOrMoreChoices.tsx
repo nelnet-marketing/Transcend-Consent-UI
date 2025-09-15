@@ -29,20 +29,18 @@ export function AcceptAllOrMoreChoices({
   ): void => {
     event.preventDefault();
       airgap.optIn(event);
-      console.log('Testing Confirmation: ', airgap.getConsent().purposes);
     handleSetViewState('close');
   };
 
   // redirect to more choices
-  const handleMoreChoices:
-    | JSX.MouseEventHandler<HTMLButtonElement>
-    | undefined = (
-    event: JSX.TargetedEvent<HTMLButtonElement, MouseEvent>,
-  ): void => {
-      event.preventDefault();
-      console.log('Testing Confirmation: ', airgap.getConsent().purposes);
-    handleSetViewState('CompleteOptionsToggles');
-  };
+  // const handleMoreChoices:
+  //   | JSX.MouseEventHandler<HTMLButtonElement>
+  //   | undefined = (
+  //   event: JSX.TargetedEvent<HTMLButtonElement, MouseEvent>,
+  // ): void => {
+  //     event.preventDefault();
+  //   handleSetViewState('CompleteOptionsToggles');
+  // };
 
   return (
     <div className="dialog-container">

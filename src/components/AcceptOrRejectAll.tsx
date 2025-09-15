@@ -29,7 +29,6 @@ export function AcceptOrRejectAll({
     ): void => {
       event.preventDefault();
       airgap.optIn(event);
-      console.log('Testing Confirmation: ', airgap.getConsent().purposes);
       handleSetViewState('close');
     };
 
@@ -41,7 +40,6 @@ export function AcceptOrRejectAll({
     ): void => {
       event.preventDefault();
       airgap.optOut(event);
-      console.log('Testing Confirmation: ', airgap.getConsent().purposes);
       handleSetViewState('close');
     };
 

@@ -97,7 +97,6 @@ export function CompleteOptionsToggles({
         [purpose]: checked,
       });
     }
-    console.log('Testing Confirmation: ', airgap.getConsent().purposes);
   };
 
   // When Confirm is pressed in confirm mode
@@ -105,7 +104,6 @@ export function CompleteOptionsToggles({
     event.preventDefault();
     airgap.setConsent(event, pendingSelections, CONSENT_OPTIONS);
     setConsentSelections(pendingSelections);
-    console.log('Testing Confirmation: ', airgap.getConsent().purposes);
     handleSetViewState('close');
   };
 
@@ -126,6 +124,15 @@ export function CompleteOptionsToggles({
             )}
           </h2>
         </div>
+        <CloseButton
+          onClick={() => {
+            handleSetViewState('close');
+          }}
+          className="complete-options-toggle-close"
+          fontColor={fontColor}
+          globalUiVariables={globalUiVariables}
+          {...(Object.entries(selectionsToRender).length === 0 ? { initialFocus: true } : {})}
+        />
         <div>
           <p
             className="paragraph"
@@ -138,15 +145,6 @@ export function CompleteOptionsToggles({
             }}
           />
         </div>
-        <CloseButton
-          onClick={() => {
-            handleSetViewState('close');
-          }}
-          className="complete-options-toggle-close"
-          fontColor={fontColor}
-          globalUiVariables={globalUiVariables}
-          {...(Object.entries(selectionsToRender).length === 0 ? {initialFocus: true} : {})}
-        />
         <div
           className="margin-tops complete-options-toggle-interface"
           role="group"

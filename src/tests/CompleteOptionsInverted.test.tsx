@@ -82,7 +82,6 @@ describe('CompleteOptionsInverted', () => {
 
   test('check states change when clicked, submission affects stored consent', () => {
     const prevConsent = { ...testWindow.airgap?.getConsent() };
-    // console.log(prevConsent)
     const screen = render(
       <CompleteOptionsInverted
         handleSetViewState={() => null}
@@ -103,7 +102,6 @@ describe('CompleteOptionsInverted', () => {
     if (submitButton) fireEvent.click(submitButton);
 
     const consent = { ...testWindow.airgap?.getConsent() };
-    // console.log(consent)
 
     Object.entries(MOCK_PURPOSES_OPTED_IN).forEach(([, purpose]) => {
       expect(!!prevConsent.purposes?.[purpose.name]).toEqual(

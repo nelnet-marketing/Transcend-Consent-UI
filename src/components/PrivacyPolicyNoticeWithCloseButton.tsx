@@ -40,6 +40,17 @@ export function PrivacyPolicyNoticeWithCloseButton({
             )}
           </h2>
         </div>
+        <CloseButton
+          onClick={(event) => {
+            event.preventDefault();
+            airgap.setConsent(event, {}, CONSENT_OPTIONS);
+            handleSetViewState('close');
+          }}
+          globalUiVariables={globalUiVariables}
+          className="privacy-policy-notice-with-close-button-close"
+          fontColor={fontColor}
+          initialFocus
+        />
         <div>
           <p
             className="paragraph"
@@ -53,17 +64,6 @@ export function PrivacyPolicyNoticeWithCloseButton({
           />
         </div>
       </div>
-      <CloseButton
-        onClick={(event) => {
-          event.preventDefault();
-          airgap.setConsent(event, {}, CONSENT_OPTIONS);
-          handleSetViewState('close');
-        }}
-        globalUiVariables={globalUiVariables}
-        className="privacy-policy-notice-with-close-button-close"
-        fontColor={fontColor}
-        initialFocus
-      />
     </div>
   );
 }

@@ -74,6 +74,14 @@ export function AcceptAllRejectAllToggle({
             )}
           </h2>
         </div>
+        <CloseButton
+          onClick={() => {
+            handleSetViewState('close');
+          }}
+          className="accept-all-reject-all-toggle-close"
+          fontColor={fontColor}
+          globalUiVariables={globalUiVariables}
+        />
         <div>
           <p
             className="paragraph"
@@ -86,14 +94,6 @@ export function AcceptAllRejectAllToggle({
             }}
           />
         </div>
-        <CloseButton
-          onClick={() => {
-            handleSetViewState('close');
-          }}
-          className="accept-all-reject-all-toggle-close"
-          fontColor={fontColor}
-          globalUiVariables={globalUiVariables}
-        />
         <div className="margin-tops do-not-sell-explainer-interface">
           <GPCIndicator globalUiVariables={globalUiVariables} />
           <Switch

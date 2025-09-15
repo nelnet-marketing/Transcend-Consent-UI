@@ -9,6 +9,7 @@ interface MenuItemBaseProps
   label: string;
   /** Inner HTML of <a> tag */
   children: ComponentChild;
+  classes?: string;
 }
 
 /**
