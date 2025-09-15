@@ -146,7 +146,6 @@ export function Main({
               heading.setAttribute('tabindex', '-1');
             }
             heading.focus();
-            heading.style.outline = 'none';
             // Start tab order from the beginning on next Tab press
             currentFocusIndex = 0;
             return;
