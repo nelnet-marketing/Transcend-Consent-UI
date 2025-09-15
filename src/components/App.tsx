@@ -13,7 +13,7 @@ import { ConsentManagerLanguageKey } from '@transcend-io/internationalization';
 
 import { makeConsentManagerAPI } from '../api';
 import { TranscendEventTarget } from '../event-target';
-import {useEffect, useRef, useState} from 'preact/hooks';
+import { useEffect, useRef, useState } from 'preact/hooks';
 import { MergedConsentManagerConfig } from '../types';
 
 // TODO: https://transcend.height.app/T-13483

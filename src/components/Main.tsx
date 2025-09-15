@@ -1,5 +1,5 @@
 /** @jsx h */
-import {h, JSX, Ref} from 'preact';
+import { h, JSX, Ref } from 'preact';
 import type {
   AirgapAPI,
   AirgapAuth,
