@@ -58,9 +58,8 @@ export function DoNotSellDisclosure({
     <div className="column-content" role="none">
       <div>
         <div>
-          <p
+          <h2
             id="consent-dialog-title"
-            role="heading"
             className="text-title text-title-left"
           >
             {formatMessage(
@@ -69,7 +68,7 @@ export function DoNotSellDisclosure({
                 : noticeAndDoNotSellMessages.doNotSellHonored,
               globalUiVariables,
             )}
-          </p>
+          </h2>
         </div>
         <div>
           <p

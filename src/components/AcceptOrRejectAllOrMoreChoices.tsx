@@ -5,6 +5,7 @@ import { useAirgap } from '../hooks';
 import { messages } from '../messages';
 import type { HandleSetViewState } from '../types';
 import { Button } from './Button';
+import { setNextFocusTarget } from '../helpers';
 
 /**
  * Component showing "accept all" or "reject all" or "more choices"
@@ -50,6 +51,7 @@ export function AcceptOrRejectAllOrMoreChoices({
     event: JSX.TargetedEvent<HTMLButtonElement, MouseEvent>,
   ): void => {
     event.preventDefault();
+    setNextFocusTarget('heading');
     handleSetViewState('CompleteOptions');
   };
 
@@ -57,13 +59,12 @@ export function AcceptOrRejectAllOrMoreChoices({
     <div className="column-content">
       <div>
         <div>
-          <p
+          <h2
             id="consent-dialog-title"
-            role="heading"
             className="text-title text-title-left"
           >
             {formatMessage(messages.consentTitleAcceptAll, globalUiVariables)}
-          </p>
+          </h2>
         </div>
         <div>
           <p

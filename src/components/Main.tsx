@@ -1,5 +1,5 @@
 /** @jsx h */
-import { h, JSX } from 'preact';
+import { h, JSX, Ref } from 'preact';
 import type {
   AirgapAPI,
   AirgapAuth,
@@ -31,19 +31,8 @@ import { AcceptOrRejectAllOrMoreChoices } from './AcceptOrRejectAllOrMoreChoices
 import { AcceptAllRejectAllToggle } from './AcceptAllRejectAllToggle';
 import { useEffect, useRef } from 'preact/hooks';
 import { CompleteOptionsToggles } from './CompleteOptionsToggles';
-import { useIntl } from 'react-intl';
-import { messages } from '../messages';
-import { initialFocusElement } from '../helpers';
+import { initialFocusElement, consumeNextFocusTarget, peekNextFocusTarget } from '../helpers';
 import { ObjByString } from '@transcend-io/type-utils';
-
-const FOCUSABLE_ELEMENTS = [
-  'button',
-  '[href]',
-  'input',
-  'select',
-  'textarea',
-  '[tabindex]:not([tabindex="-1"])',
-].join(',');
 
 /**
  * Presents view states (collapsed, GDPR-mode, CCPA-mode etc)
@@ -55,6 +44,7 @@ export function Main({
   firstSelectedViewState,
   globalUiVariables,
   handleSetViewState,
+  bannerTopRef,
   handleChangeLanguage,
   supportedLanguages,
   modalOpenAuth,
@@ -73,12 +63,13 @@ export function Main({
   firstSelectedViewState: ViewState | 'AcceptOrRejectAll' | null;
   /** Updater function for viewState */
   handleSetViewState: HandleSetViewState;
+  /** Ref to the top of the banner */
+  bannerTopRef: Ref<HTMLDivElement>;
   /** Updater function for language change */
   handleChangeLanguage: (language: ConsentManagerLanguageKey) => void;
   /** Set of supported languages */
   supportedLanguages: ConsentManagerLanguageKey[];
 }): JSX.Element {
-  const { formatMessage } = useIntl();
   // need to focus the element marked with data-initialFocus when the modal is opened
   // regular autofocus attributes caused errors, thus the data attribute usage
   // NOTE: if we want to meet a11y guidelines we will need to implement a focus trap as well
@@ -86,17 +77,15 @@ export function Main({
   useEffect(() => {
     if (!isViewStateClosed(viewState) && dialogRef.current) {
       const shouldAutofocus = config?.autofocus !== 'off';
+      const deferForHeading = peekNextFocusTarget() === 'heading';
       // This setTimeout was necessary for the api triggered states, (DoNotSell|OptOut)Disclosure
       setTimeout(() => {
-        if (dialogRef.current && shouldAutofocus) {
+        if (dialogRef.current && shouldAutofocus && !deferForHeading) {
           initialFocusElement(dialogRef.current);
         }
       }, 0);
     }
   }, [viewState, dialogRef, config.autofocus]);
-
-  const firstFocusableRef = useRef<HTMLElement | null>(null);
-  const lastFocusableRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     if (!isViewStateClosed(viewState) && dialogRef.current) {
@@ -105,7 +94,7 @@ export function Main({
 
       const getFocusableElements = () => {
         const elements = modalElement.querySelectorAll<HTMLElement>(
-          'button:not([disabled]), [href], input:not([disabled]), .button, .bottom-menu-item'
+          'button:not([disabled]), [href], input:not([disabled]), .button, .bottom-menu-item, h2[tabindex="-1"]'
         );
         return Array.from(elements).filter(el => {
           const style = window.getComputedStyle(el);
@@ -147,6 +136,22 @@ export function Main({
       const setInitialFocus = () => {
         const focusableElements = getFocusableElements();
 
+        // If a focus handoff to the heading was requested, prioritize that
+        const handoff = consumeNextFocusTarget();
+        if (handoff === 'heading') {
+          const heading = modalElement.querySelector<HTMLElement>('#consent-dialog-title');
+          if (heading) {
+            // Ensure heading is programmatically focusable without requiring every component to set tabIndex
+            if (!heading.hasAttribute('tabindex')) {
+              heading.setAttribute('tabindex', '-1');
+            }
+            heading.focus();
+            // Start tab order from the beginning on next Tab press
+            currentFocusIndex = 0;
+            return;
+          }
+        }
+
         const initialFocusEl = modalElement.querySelector<HTMLElement>('[data-initialFocus]');
         if (initialFocusEl) {
           initialFocusEl.focus();
@@ -167,6 +172,8 @@ export function Main({
       return () => {
         document.removeEventListener('keydown', handleKeyDown, true);
       };
+    } else {
+      return undefined;
     }
   }, [viewState, handleSetViewState]);
 
@@ -179,13 +186,13 @@ export function Main({
       <div
         role="dialog"
         aria-modal="true"
-        aria-label={formatMessage(messages.modalAriaLabel, globalUiVariables)}
+        aria-labelledby="consent-dialog-title"
         className="modal-container"
         id="consentManagerMainDialog"
         ref={dialogRef}
         tabIndex={-1}
       >
-        <div className="modal-container-inner">
+        <div className="modal-container-inner" ref={bannerTopRef} tabIndex={-1}>
           <div className="inner-container">
             {viewState === 'QuickOptions' && (
               <QuickOptions

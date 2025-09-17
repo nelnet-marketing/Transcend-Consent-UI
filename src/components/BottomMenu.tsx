@@ -7,6 +7,7 @@ import type { HandleSetViewState } from '../types';
 import { MenuItem } from './MenuItem';
 import { ObjByString } from '@transcend-io/type-utils';
 import {ExternalLinkIcon} from './ExternalLinkIcon';
+import { setNextFocusTarget } from '../helpers';
 
 const VIEW_STATE_TO_MESSAGE: { [k in ViewState]: DefinedMessage | undefined } =
   {
@@ -115,7 +116,7 @@ export function BottomMenu({
                     globalUiVariables,
                   )}
                   type="button"
-                  onClick={() => handleSetViewState(firstSelectedViewState)}
+                  onClick={() => { setNextFocusTarget('heading'); handleSetViewState(firstSelectedViewState); }}
                 >
                   {formatMessage(
                     bottomMenuMessages.simplerChoicesButtonPrimary,
@@ -132,11 +133,14 @@ export function BottomMenu({
                   globalUiVariables,
                 )}
                 type="button"
-                onClick={() => handleSetViewState(
-                  (viewState === 'AcceptOrRejectAll' || viewState === 'AcceptAllOrMoreChoices')
-                    ? 'CompleteOptionsToggles'
-                    : 'CompleteOptions'
-                )}
+                onClick={() => {
+                  setNextFocusTarget('heading');
+                  handleSetViewState(
+                    (viewState === 'AcceptOrRejectAll' || viewState === 'AcceptAllOrMoreChoices')
+                      ? 'CompleteOptionsToggles'
+                      : 'CompleteOptions'
+                  );
+                }}
               >
                 {formatMessage(
                   bottomMenuMessages.moreChoicesButtonPrimary,

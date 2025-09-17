@@ -3,13 +3,12 @@
 exports[`QuickOptions matches snapshot 1`] = `
 "<div>
   <div>
-    <p
+    <h2
       id="consent-dialog-title"
       class="text-title text-title-center"
-      role="heading"
     >
       What can we use data for?
-    </p>
+    </h2>
     <div
       role="group"
       class="column-content"

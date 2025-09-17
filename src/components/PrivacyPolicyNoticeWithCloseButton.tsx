@@ -28,30 +28,29 @@ export function PrivacyPolicyNoticeWithCloseButton({
 
   return (
     <div className="column-content" role="none">
-      <CloseButton
-        onClick={(event) => {
-          event.preventDefault();
-          airgap.setConsent(event, {}, CONSENT_OPTIONS);
-          handleSetViewState('close');
-        }}
-        globalUiVariables={globalUiVariables}
-        className="privacy-policy-notice-with-close-button-close"
-        fontColor={fontColor}
-        initialFocus
-      />
       <div>
         <div>
-          <p
+          <h2
             id="consent-dialog-title"
-            role="heading"
             className="text-title text-title-left"
           >
             {formatMessage(
               messages.consentTitlePrivacyPolicyNoticeWithCloseButton,
               globalUiVariables,
             )}
-          </p>
+          </h2>
         </div>
+        <CloseButton
+          onClick={(event) => {
+            event.preventDefault();
+            airgap.setConsent(event, {}, CONSENT_OPTIONS);
+            handleSetViewState('close');
+          }}
+          globalUiVariables={globalUiVariables}
+          className="privacy-policy-notice-with-close-button-close"
+          fontColor={fontColor}
+          initialFocus
+        />
         <div>
           <p
             className="paragraph"

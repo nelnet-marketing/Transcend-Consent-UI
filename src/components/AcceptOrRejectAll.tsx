@@ -29,7 +29,6 @@ export function AcceptOrRejectAll({
     ): void => {
       event.preventDefault();
       airgap.optIn(event);
-      console.log('Testing Confirmation: ', airgap.getConsent().purposes);
       handleSetViewState('close');
     };
 
@@ -41,20 +40,18 @@ export function AcceptOrRejectAll({
     ): void => {
       event.preventDefault();
       airgap.optOut(event);
-      console.log('Testing Confirmation: ', airgap.getConsent().purposes);
       handleSetViewState('close');
     };
 
   return (
     <div className="dialog-container">
       <div className="dialog-title">
-        <p
+        <h2
           id="consent-dialog-title"
-          role="heading"
           className="text-title text-title-left"
         >
           {formatMessage(messages.consentTitleAcceptAll, globalUiVariables)}
-        </p>
+        </h2>
       </div>
 
       <div className="column-content">

@@ -13,6 +13,21 @@ export function initialFocusElement(root: Element | DocumentFragment): void {
   el?.focus();
 }
 
+// Simple global handoff for focus target between view transitions
+let __nextFocusTarget: 'heading' | null = null;
+export function setNextFocusTarget(target: 'heading' | null): void {
+  __nextFocusTarget = target;
+}
+export function consumeNextFocusTarget(): 'heading' | null {
+  const t = __nextFocusTarget;
+  __nextFocusTarget = null;
+  return t;
+}
+// Peek without consuming, useful to coordinate autofocus timing
+export function peekNextFocusTarget(): 'heading' | null {
+  return __nextFocusTarget;
+}
+
 export const sortByPurposeOrder = (
   [a]: [keyof ConsentSelection, ...unknown[]],
   [b]: [keyof ConsentSelection, ...unknown[]],

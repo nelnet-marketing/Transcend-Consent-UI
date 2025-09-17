@@ -55,27 +55,26 @@ export function DoNotSellExplainer({
 
   return (
     <div className="column-content" role="none">
-      <CloseButton
-        onClick={() => {
-          handleSetViewState('close');
-        }}
-        className="do-not-sell-explainer-close"
-        fontColor={fontColor}
-        globalUiVariables={globalUiVariables}
-      />
       <div>
         <div>
-          <p
+          <h2
             id="consent-dialog-title"
-            role="heading"
             className="text-title text-title-left"
           >
             {formatMessage(
               messages.consentTitleDoNotSellExplainer,
               globalUiVariables,
             )}
-          </p>
+          </h2>
         </div>
+        <CloseButton
+          onClick={() => {
+            handleSetViewState('close');
+          }}
+          className="do-not-sell-explainer-close"
+          fontColor={fontColor}
+          globalUiVariables={globalUiVariables}
+        />
         <div>
           <div
             className="paragraph"

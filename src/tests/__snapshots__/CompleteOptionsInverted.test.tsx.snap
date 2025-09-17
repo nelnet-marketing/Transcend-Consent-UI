@@ -3,13 +3,12 @@
 exports[`CompleteOptionsInverted matches snapshot 1`] = `
 "<div>
   <div class="complete-options-container" role="none">
-    <p
+    <h2
       id="consent-dialog-title"
-      role="heading"
       class="text-title text-title-center"
     >
       Your Privacy Choices
-    </p>
+    </h2>
     <form class="complete-options-form">
       <span style="display: none"></span>
       <div

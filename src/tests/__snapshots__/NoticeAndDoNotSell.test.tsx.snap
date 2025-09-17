@@ -3,13 +3,12 @@
 exports[`NoticeAndDoNotSell matches snapshot 1`] = `
 "<div>
   <div class="column-content" role="none">
-    <p
+    <h2
       id="consent-dialog-title"
-      role="heading"
       class="text-title text-title-left"
     >
       This website processes personal data
-    </p>
+    </h2>
     <button
       class="button"
       aria-description="Acknowledge and close dialog."

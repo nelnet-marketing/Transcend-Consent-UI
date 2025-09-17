@@ -97,7 +97,6 @@ export function CompleteOptionsToggles({
         [purpose]: checked,
       });
     }
-    console.log('Testing Confirmation: ', airgap.getConsent().purposes);
   };
 
   // When Confirm is pressed in confirm mode
@@ -105,7 +104,6 @@ export function CompleteOptionsToggles({
     event.preventDefault();
     airgap.setConsent(event, pendingSelections, CONSENT_OPTIONS);
     setConsentSelections(pendingSelections);
-    console.log('Testing Confirmation: ', airgap.getConsent().purposes);
     handleSetViewState('close');
   };
 
@@ -114,28 +112,27 @@ export function CompleteOptionsToggles({
 
   return (
     <div className="column-content" role="none">
-      <CloseButton
-        onClick={() => {
-          handleSetViewState('close');
-        }}
-        className="complete-options-toggle-close"
-        fontColor={fontColor}
-        globalUiVariables={globalUiVariables}
-        {...(Object.entries(selectionsToRender).length === 0 ? { initialFocus: true } : {})}
-      />
       <div>
         <div>
-          <p
+          <h2
             id="consent-dialog-title"
-            role="heading"
             className="text-title text-title-left"
           >
             {formatMessage(
               messages.consentTitleCompleteOptionsToggle,
               globalUiVariables,
             )}
-          </p>
+          </h2>
         </div>
+        <CloseButton
+          onClick={() => {
+            handleSetViewState('close');
+          }}
+          className="complete-options-toggle-close"
+          fontColor={fontColor}
+          globalUiVariables={globalUiVariables}
+          {...(Object.entries(selectionsToRender).length === 0 ? { initialFocus: true } : {})}
+        />
         <div>
           <p
             className="paragraph"
@@ -161,6 +158,7 @@ export function CompleteOptionsToggles({
               id={`Essential-true`}
               checked={true}
               disabled={true}
+              ariaDescribedby="essential-desc"
               handleSwitch={(checked, event) =>
                 // this should never be called but makes type happy
                 handleSwitch({
@@ -178,7 +176,7 @@ export function CompleteOptionsToggles({
                   : 'Essential'
               }
             />
-            <p className="paragraph complete-options-toggle-description">
+            <p className="paragraph complete-options-toggle-description" id="essential-desc">
               {formatMessage(
                 purposeToDescriptionKey.Essential,
                 globalUiVariables,
@@ -189,6 +187,7 @@ export function CompleteOptionsToggles({
             <span key={purpose}>
               <Switch
                 id={purpose}
+                ariaDescribedby={`${purpose}-desc`}
                 checked={selectionsToRender[purpose]}
                 handleSwitch={(checked, event) =>
                   handleSwitch({
@@ -207,7 +206,7 @@ export function CompleteOptionsToggles({
                 }
                 {...(idx === 0 ? { initialFocus: true } : {})}
               />
-              <p className="paragraph complete-options-toggle-description">
+              <p className="paragraph complete-options-toggle-description" id={`${purpose}-desc`}>
                 {formatMessage(
                   purposeToDescriptionKey[purpose],
                   globalUiVariables,

@@ -13,7 +13,7 @@ import { ConsentManagerLanguageKey } from '@transcend-io/internationalization';
 
 import { makeConsentManagerAPI } from '../api';
 import { TranscendEventTarget } from '../event-target';
-import { useState } from 'preact/hooks';
+import { useEffect, useRef, useState } from 'preact/hooks';
 import { MergedConsentManagerConfig } from '../types';
 
 // TODO: https://transcend.height.app/T-13483
@@ -56,6 +56,9 @@ export function App({
       privacyRegime as keyof typeof initialViewStateByPrivacyRegime
     ] || 'Hidden';
 
+  // A focus target at the top of the banner to ensure screen readers read from the top
+  const bannerTopRef = useRef<HTMLDivElement>(null);
+
   // View state controller. Defaults based on regime and config.
   const { viewState, firstSelectedViewState, handleSetViewState, auth } =
     useViewState({
@@ -68,7 +71,19 @@ export function App({
           ? document.activeElement
           : null,
       autofocus,
-    });
+      // Note: we keep focusing via an effect below to ensure we always target the current element
+      // bannerTopRef is intentionally not passed here to avoid stale element references
+});
+
+  // When the viewState changes to something other than Hidden, focus on the top of the banner
+  useEffect(() => {
+    //only focus when modal is visible
+    if (viewState !== 'Hidden') {
+      if (bannerTopRef.current) {
+        bannerTopRef.current.focus();
+      }
+    }
+  }, [viewState]);
 
   // Language setup
   const { language, handleChangeLanguage, messages, htmlTagVariables } =
@@ -133,6 +148,7 @@ export function App({
             firstSelectedViewState={firstSelectedViewState}
             handleSetViewState={handleSetViewState}
             handleChangeLanguage={handleChangeLanguage}
+            bannerTopRef={bannerTopRef}
           />
         ) : null}
       </AirgapProvider>
